@@ -7,7 +7,7 @@ import config
 from strings import animate_title, center_string, days_till, minutes_since, write_big
 
 def welcome():
-    write_big('bitticka', 'welcome')
+    write_big('bitticka')
     animate_title('***** BITTICKA *****')
     sleep(.5)
     center_string('********************', 1)
@@ -16,6 +16,22 @@ def welcome():
     sleep(.5)
     center_string('by Kailash', 3)
     sleep(2)
+    lcd.clear()
+    animate_title('LET\'S', 1)
+    sleep(.5)
+    lcd.clear()
+    animate_title('F**!NG', 2)
+    sleep(.5)
+    lcd.clear()
+    animate_title('>>> GO <<<', 3)
+    sleep(.3)
+    lcd.clear()
+    animate_title('>>> GO <<<', 3)
+    sleep(.1)
+    center_string('LET\'S', 1)
+    center_string('F**!NG', 2)
+    center_string('>>> GO <<<', 3)
+    sleep(1)
 
 class Section:
 
@@ -197,5 +213,8 @@ class SatRatesSection(Section):
         center_string("1 USD = {:,} sats".format(int(self.data["usd"])), 3)
 
     def screen2(self):
-        write_big("{:,}".format(int(self.data["usd"])), "satsusd")
+        if config.MOSCOWTIME:
+            write_big("{}".format(int(self.data["usd"])), "moscowtime")
+        else:
+            write_big("{:,}".format(int(self.data["usd"])), "satsusd")
         write_big("{:,}".format(int(self.data["gbp"])), "satsgbp")

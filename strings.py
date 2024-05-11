@@ -122,9 +122,9 @@ def write_big(txt, prefix=None):
         lcd.clear()
 
 
-def animate_title(title):
+def animate_title(title, row=0):
     s = ''
     for char in title:
         s += char
-        center_string(s, 0)
+        center_string(s, row)
         sleep(0.02)
