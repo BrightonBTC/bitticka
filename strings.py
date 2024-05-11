@@ -2,6 +2,7 @@ import datetime
 from time import mktime, sleep
 from lcd import lcd
 from chars import big_chars, big_prefix, blk_btm, blk_top, blk_full, blk_empty
+import config
 
 def minutes_since(ts):
     now = datetime.datetime.now()
@@ -24,12 +25,11 @@ def center_string(s, row):
         lcd.cursor_pos = (row, x)
         lcd.write_string(s)
 
-def map_big_char(n, pos):
+def map_big_char(n):
     nmap = big_chars[str(n)]
     row_n = 0
     out = ['','','','']
     for row in nmap:
-        char_n = pos
         out[row_n] = ''
         for blk in row:
             if blk == 0:
@@ -92,13 +92,13 @@ def write_big(txt, prefix=None):
         for row in range(4):
             lines[row] += p[row] + ' '
 
-    i = pre_len + 1
+    #i = pre_len + 1
 
     for char in txt:
-        p = map_big_char(char, i)
+        p = map_big_char(char)
         for row in range(4):
             lines[row] += p[row] + ' '
-        i += len(big_chars[char][0]) + 1
+        #i += len(big_chars[char][0]) + 1
 
     if prefix:
         p = map_prefix(prefix)
@@ -117,8 +117,8 @@ def write_big(txt, prefix=None):
         lcd.cursor_pos = (0, 0)
         lcd.write_string(segment)
 
-        offset += 6
-        sleep(0.3)
+        offset += config.SCROLL_JUMP
+        sleep(config.SCROLL_FREQ)
         lcd.clear()
 
 
