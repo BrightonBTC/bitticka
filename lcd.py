@@ -2,7 +2,7 @@ from RPLCD.i2c import CharLCD
 from chars import custom_chars
 import config
 
-lcd = CharLCD("PCF8574", 0x27, auto_linebreaks=False)
+lcd = CharLCD("PCF8574", config.LCD_ADDRESS, auto_linebreaks=False)
 lcd.backlight_enabled = bool(config.BACKLIGHT)
 
 lcd.create_char(0, custom_chars[0])
