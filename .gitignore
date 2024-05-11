@@ -289,3 +289,4 @@ pyrightconfig.json
 .profile
 .fishsrv.pl
 .sudo_as_admin_successful
+config.py

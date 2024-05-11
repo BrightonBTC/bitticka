@@ -1,15 +1,12 @@
 import requests
+import config
 
-API_URL = 'https://explorer.brightbit.duckdns.org'
-
-def fetch_from_api(url=API_URL, endpoint='/api/price'):
-    if not url:
-        return {'error':'Invalid URL'}
-
+def fetch_from_api(endpoint='/api/price'):
+    
     try:
         response = requests.get(
-            '{}{}'.format(url, endpoint), 
-            headers={'User-Agent': 'LabDash HomeLab Dashboard'}
+            '{}{}'.format(config.API_URL, endpoint), 
+            headers={'User-Agent': 'Biticka Bitcoin Ticker'}
         )
         return response.json()
     

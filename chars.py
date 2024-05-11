@@ -6,6 +6,12 @@ custom_chars = [
     [0b00110, 0b01001, 0b01000, 0b11110, 0b01000, 0b01000, 0b11111, 0b00000]
 ]
 
+gbp = "\x04"
+blk_top = "\x03"
+blk_btm = "\x02"
+blk_full = "\x01"
+blk_empty = "\x00"
+
 
 big_chars = {
     "0": [
