@@ -1,12 +1,10 @@
-from lcd import lcd
 import views
 
 views.welcome()
 
 while 1:
 
-    lcd.clear()
-
+    views.lfg()
     views.McapSection()
     views.HalvingSection()
     views.XRatesSection()

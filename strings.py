@@ -105,7 +105,7 @@ def write_big(txt, prefix=None):
         for row in range(4):
             lines[row] += p[row] + ' '
 
-    offset = 10
+    offset = 0
 
     while offset < total_len + 20:
 

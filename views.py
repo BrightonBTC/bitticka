@@ -16,6 +16,9 @@ def welcome():
     sleep(.5)
     center_string('by Kailash', 3)
     sleep(2)
+    
+
+def lfg():
     lcd.clear()
     animate_title('LET\'S', 1)
     sleep(.5)
@@ -48,6 +51,7 @@ class Section:
             self.screen1()
             sleep(config.PAUSE2_LEN)
             lcd.clear()
+            sleep(0.5)
         else:
             self.error()
 
@@ -130,7 +134,7 @@ class HalvingSection(Section):
 
 
     def screen2(self):
-        write_big("{:,}days".format(self.countdown_days), "days_till_halving")
+        write_big("{:,} days".format(self.countdown_days), "days_till_halving")
 
 
 class SupplySection(Section):
