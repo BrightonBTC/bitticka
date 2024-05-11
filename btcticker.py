@@ -1,6 +1,8 @@
 from lcd import lcd
 import views
 
+views.welcome()
+
 while 1:
 
     lcd.clear()

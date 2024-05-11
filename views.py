@@ -6,6 +6,17 @@ from chars import gbp
 import config
 from strings import animate_title, center_string, days_till, minutes_since, write_big
 
+def welcome():
+    write_big('bitticka', 'welcome')
+    animate_title('***** BITTICKA *****')
+    sleep(.5)
+    center_string('********************', 1)
+    sleep(.5)
+    center_string('Bitcoin Ticker', 2)
+    sleep(.5)
+    center_string('by Kailash', 3)
+    sleep(2)
+
 class Section:
 
     def __init__(self, endpoint):
