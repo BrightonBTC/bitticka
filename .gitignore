@@ -2,6 +2,10 @@ config/**
 **/__pycache__
 .idea/**
 .vscode/**
+.vscode-server/**
+.dotnet/**
+.ssh/**
+.ssh/**
 .dockerignore
 # Created by https://www.toptal.com/developers/gitignore/api/linux,python,pycharm+iml
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,python,pycharm+iml
@@ -280,3 +284,8 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+.wget-hsts
+.bash*
+.profile
+.fishsrv.pl
+.sudo_as_admin_successful
