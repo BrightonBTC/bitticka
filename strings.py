@@ -21,7 +21,7 @@ def center_string(s, row):
         lcd.cursor_pos = (row, 0)
         lcd.write_string(s[:19])
     else:
-        x = round(10 - len(s)/2)
+        x = 10 - int(len(s)/2)
         lcd.cursor_pos = (row, x)
         lcd.write_string(s)
 

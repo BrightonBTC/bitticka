@@ -2,7 +2,7 @@
 LCD_ADDRESS = 0x27
 
 # URL of a bitcoin explore instance. No trailing slash.
-API_URL = 'https://my-bitcoin-explorer-instance.wow'
+API_URL = 'https://bitcoinexplorer.org'
 
 # Enable/disable back light
 BACKLIGHT = True 
@@ -14,18 +14,23 @@ MOSCOWTIME = True
 PAUSE_LEN = int #seconds 
 PAUSE2_LEN = int #seconds  
 
-bitticka loops through a number of programs each of which has 2 views: a details view with small text
-and a banner view with large scrolling text. Each program shows view1, then view2, and finally view1 again.
-A pause is inserted after each display of view 1.
+bitticka loops through a number of programs (exchange rates, next halving, ...) 
+each of which has 2 views: a details view with small text and a banner view with 
+large scrolling text. Each program shows view1, then view2, and finally view1 
+again. A pause is inserted after each display of view 1.
 
 - display view 1
-- pause 1
+- pause PAUSE_LEN
 - display view 2
 - display view 1
-- pause 2
+- pause PAUSE2_LEN
+- clear display
+- pause PAUSE3_LEN
+
 """
 PAUSE_LEN = 2 
 PAUSE2_LEN = 1 
+PAUSE3_LEN = 1 
 
 """
 The following 2 settings modify the scrolling effect. It's recommended to only make small adjustments at a

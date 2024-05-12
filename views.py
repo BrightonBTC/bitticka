@@ -35,6 +35,7 @@ def lfg():
     center_string('F**!NG', 2)
     center_string('>>> GO <<<', 3)
     sleep(1)
+    lcd.clear()
 
 class Section:
 
@@ -51,7 +52,7 @@ class Section:
             self.screen1()
             sleep(config.PAUSE2_LEN)
             lcd.clear()
-            sleep(0.5)
+            sleep(config.PAUSE3_LEN)
         else:
             self.error()
 
@@ -128,8 +129,9 @@ class HalvingSection(Section):
         animate_title("NEXT HALVING:")
         parts = self.data["timeUntilNextHalving"].split(',')
         for x in range(len(parts)):
-            lcd.cursor_pos = (x+1, 7)
-            lcd.write_string(parts[x].strip())
+            #lcd.cursor_pos = (x+1, 7)
+            center_string(parts[x].strip(' \t\n\r'), x+1)
+            print('#{}#'.format(parts[x].strip(' \t\n\r')))
             #center_string(parts[x].strip(' \t\n\r'), x+1)
 
 
