@@ -1,5 +1,6 @@
-# *:B:itticka*
-__*raspi lcd bitcoin ticker*__
+# *::: :B:itticka :::*
+#### *raspi lcd bitcoin ticker*
+
 This simple ticker connects to a [BitcoinExplorer](https://bitcoinexplorer.org) instance and displays some stats about the bitcoin network such as exchange rates, halving countdown, latest block, etc.
 
 ![bitticka welcome screen](img/20240512_124431.gif)
@@ -47,6 +48,17 @@ sudo apt-get install i2c-tools
 ```
 You should now see a table in which one cell contains a number. **Note this number down.**
 
+```
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                         -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- 27 -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --  
+```
 
 ## Install other dependencies
 
