@@ -3,7 +3,8 @@
 
 This simple ticker connects to a [BitcoinExplorer](https://bitcoinexplorer.org) instance and displays some stats about the bitcoin network such as exchange rates, halving countdown, latest block, etc.
 
-![bitticka welcome screen](img/20240512_124431.gif)
+![bitticka](img/20240512_124431.gif)
+![bitticka](img/20240512_131630.gif)
 
 TODO (at some point if I get around to it): Setup RPC connection with BTC Core node and add a few extra info screens to the LCD.
 
