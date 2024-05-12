@@ -1,14 +1,17 @@
 # *:B:itticka*
-*raspi lcd bitcoin ticker*
+__*raspi lcd bitcoin ticker*__
+This simple ticker connects to a [BitcoinExplorer](https://bitcoinexplorer.org) instance and displays some stats about the bitcoin network such as exchange rates, halving countdown, latest block, etc.
 
 ![bitticka welcome screen](img/20240512_124431.gif)
+
+TODO (at some point if I get around to it): Setup RPC connection with BTC Core node and add a few extra info screens to the LCD.
 
 ## Required Components
 
 - Raspberry pi + raspi OS installed (I used an old 3b I had kicking around but most pi's should work so long as they have internet capabilities. ie.pi3/4/5,zero w, etc.)
-- 20x4 alphanumeric LCD with PCF8574 I2C expander (or you could do it without but you'd need to figure out the extra wiring)
+- 20x4 alphanumeric LCD with PCF8574 I2C expander (or you could do it without the expander but you'd need to figure out the extra wiring)
 - 4 jumper cables to go from pi to the display
-- A BitcoinExplorer [(?)](https://bitcoinexplorer.org) API to connect to (self hosted is recommended)
+- A BitcoinExplorer instance to connect to (self hosted and connected to your own BTC Core node is recommended)
 
 ## Connect the display
 
