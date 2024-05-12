@@ -73,7 +73,7 @@ sudo apt install python-smbus
 
 ## Clone this repo
 ```
-git clone [this repo .git]
+git clone https://github.com/BrightonBTC/bitticka.git
 cd bitticka
 ```
 
