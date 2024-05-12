@@ -84,4 +84,5 @@ Whilst still in the bitticka dir run the script to make sure it's working.
 python3 ./btcticker.py
 ```
 You should now see the welcome screen appear
+
 ![bitticka welcome screen](img/20240512_123642.gif)
