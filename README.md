@@ -1,19 +1,19 @@
 # *::: :B:itticka :::*
-#### *raspi lcd bitcoin ticker*
+#### *bitcoin ticker/block clock with a raspi + 20x4 alphanumeric lcd*
 
 This simple ticker connects to a [BitcoinExplorer](https://bitcoinexplorer.org) instance and displays some stats about the bitcoin network such as exchange rates, halving countdown, latest block, etc.
 
 ![bitticka](img/20240512_124431.gif)
 ![bitticka](img/20240512_132118.gif) 
 
-TODO (at some point if I get around to it): Setup RPC connection with BTC Core node and add a few extra info screens to the LCD.
+_**TODO**_ (at some point if I get around to it): Setup connection to BTC Core node and use RPC data to add a few extra info screens to the LCD.
 
 ## Required Components
 
-- Raspberry pi + raspi OS installed (I used an old 3b I had kicking around but most pi's should work so long as they have internet capabilities. ie.pi3/4/5,zero w, etc.)
-- 20x4 alphanumeric LCD with PCF8574 I2C expander (or you could do it without the expander but instructions for the extra wiring are not included here)
-- 4 jumper cables to go from pi to the display
-- A BitcoinExplorer instance to connect to (self hosted and connected to your own BTC Core node is recommended)
+- **Raspberry pi + raspi OS installed** (I used an old 3b I had kicking around but most pi's should work so long as they have internet capabilities. ie.pi3/4/5,zero w, etc.)
+- **20x4 alphanumeric LCD** with **PCF8574 I2C expander** (or you could do it without the expander but instructions for the extra wiring are not included here)
+- **4 jumper cables** to go from pi to the display
+- A **BitcoinExplorer instance** to connect to (self hosted and connected to your own BTC Core node is recommended)
 
 ## Connect the display
 
@@ -21,33 +21,34 @@ Connecting a pi to a PCF8574 expander is simple and there are many tutorials onl
 
 There are only 4 pins on the LCD expander, each one needs to be connected to the pi in the following manor:
 
-- SDA > SDA
-- SCL > SCL
-- GND > GND
-- VCC > 5v
+- SDA -> SDA
+- SCL -> SCL
+- GND -> GND
+- VCC -> 5v
 
 ![pi to lcd wiring](img/20240512_115027.jpg)
 
 ## Enable I2C
-1) open raspi-config
+1) open raspi-config:
 ```
 sudo raspi-config
 ```
-2) Select `Interface Options` and then make sure `I2c` is enabled
+2) Select `Interface Options` from the list
+3) Make sure `I2c` is enabled
 
 
 ## Install i2c-tools and get LCD address
 
-1) install tools
+1) install tools:
 ```
 sudo apt-get install i2c-tools
 ```
 2) reboot pi
-3) find the address
+3) find the address:
 ```
 sudo apt-get install i2c-tools
 ```
-You should now see a table in which one cell contains a number. **Note this number down.**
+You should now see a table similar to below in which one cell contains a number. **Note this number down.**
 
 ```
      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
@@ -87,7 +88,7 @@ Change the LCD_ADDRESS to the one you noted down earlier, and change API_URL to 
 ```
 LCD_ADDRESS = 0x27
 
-# URL of a bitcoin explore instance. No trailing slash.
+# URL of a bitcoin explorer instance. No trailing slash.
 API_URL = 'https://bitcoinexplorer.org'
 ```
 
@@ -154,7 +155,7 @@ while 1:
 
 any views before the while loop play once when bitticka first loads. Anything inside the while loop will loop continuously.
 
-If you're comfortable writing a bit of Python code it would be fairly trivial to add extra views. You can refer to `views.py`. If you use the `write_big()` function in your view just be aware that it only handles a limited set of chars (0-9 and lowercase alphanumeric are safe) and any additional ones would need to be created and added to the `big_chars` maps in `chars.py`.
+If you're comfortable writing a bit of Python code it would be fairly trivial to add extra views. You can refer to `views.py`. If you use the `write_big()` function in your view just be aware that it only handles a limited set of chars (0-9 and lowercase alphanumeric are safe) and any additional ones would need to be mapped and added to the `big_chars` array in `chars.py`.
 
 If you create anything cool that other might want to use then consider putting in a pull request.
 

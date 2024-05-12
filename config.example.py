@@ -1,7 +1,7 @@
 
 LCD_ADDRESS = 0x27
 
-# URL of a bitcoin explore instance. No trailing slash.
+# URL of a bitcoin explorer instance. No trailing slash.
 API_URL = 'https://bitcoinexplorer.org'
 
 # Enable/disable back light
