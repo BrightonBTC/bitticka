@@ -1,11 +1,11 @@
 import requests
 import config
 
-def fetch_from_explorer(endpoint='/api/price'):
+def fetch_from_mempool(endpoint='/api/price'):
     
     try:
         response = requests.get(
-            '{}{}'.format(config.EXPLORER_API_URL, endpoint), 
+            '{}{}'.format(config.MEMPOOL_API_URL, endpoint), 
             headers={'User-Agent': 'Biticka Bitcoin Ticker'}
         )
         return response.json()

@@ -1,4 +1,5 @@
-from btcexplorer import fetch_from_api
+from views.section import Section
+from btcexplorer import fetch_from_explorer
 from time import sleep
 from lcd import lcd
 from chars import gbp
@@ -6,69 +7,24 @@ from chars import gbp
 import config
 from strings import animate_title, center_string, days_till, minutes_since, write_big
 
-def welcome():
-    write_big('bitticka')
-    animate_title('***** BITTICKA *****')
-    sleep(.5)
-    center_string('********************', 1)
-    sleep(.5)
-    center_string('Bitcoin Ticker', 2)
-    sleep(.5)
-    center_string('by Kailash', 3)
-    sleep(2)
 
 
-class Section:
+
+class ExplorerSection(Section):
 
     def __init__(self, endpoint):
-        self.loading_screen()
-        self.data = fetch_from_api(endpoint=endpoint)
-        lcd.clear()
-
-        if not self.has_error():
-            self.before_render()
-            self.screen1()
-            sleep(config.PAUSE_LEN)
-            self.screen2()
-            self.screen1()
-            sleep(config.PAUSE2_LEN)
-            lcd.clear()
-            sleep(config.PAUSE3_LEN)
-        else:
-            self.error()
+        super().__init__()
+        data = fetch_from_explorer(endpoint=endpoint)
+        self.run(data)
 
 
-    def loading_screen(self):
-        lcd.cursor_pos = (1, 5)
-        center_string("Fetching...", 1)
-
-    def before_render(self):
-        pass
-
-    def screen1(self):
-        pass
-
-    def screen2(self):
-        pass
-
-    def has_error(self):
-        if not self.data or 'error' in self.data:
-            return True
-        return False
-
-    def error(self):
-        lcd.cursor_pos = (1, 0)
-        lcd.write_string("Error connecting to API")
-        sleep(config.PAUSE_LEN)
-
-
-class BlockheightSection(Section):
+class BlockheightSection(ExplorerSection):
 
     def __init__(self):
         super().__init__("/api/blocks/tip")
 
     def before_render(self):
-        self.block_details = fetch_from_api(endpoint="/api/block/{}".format(self.data["height"]))
+        self.block_details = fetch_from_explorer(endpoint="/api/block/{}".format(self.data["height"]))
 
     def loading_screen(self):
         animate_title("LATEST BLOCK:")
@@ -79,14 +35,14 @@ class BlockheightSection(Section):
         center_string("height: {:,}".format(self.data["height"]), 2)
 
         if self.block_details and 'error' not in self.block_details:
-            block_details = fetch_from_api(endpoint="/api/block/{}".format(self.data["height"]))
+            block_details = fetch_from_explorer(endpoint="/api/block/{}".format(self.data["height"]))
             center_string("{} mins ago".format(minutes_since(block_details["time"])), 3)
 
     def screen2(self):
         write_big("{:,}".format(int(self.data["height"])), "block_height")
 
 
-class HalvingSection(Section):
+class HalvingSection(ExplorerSection):
 
     def __init__(self):
         super().__init__("/api/blockchain/next-halving")  
@@ -120,7 +76,7 @@ class HalvingSection(Section):
         write_big("{:,} days".format(self.countdown_days), "days_till_halving")
 
 
-class SupplySection(Section):
+class SupplySection(ExplorerSection):
 
     def __init__(self):
         super().__init__("/api/blockchain/coins")  
@@ -141,7 +97,7 @@ class SupplySection(Section):
         write_big("{:,.2f}".format(float(self.data["supply"])), "current_supply")
 
 
-class McapSection(Section):
+class McapSection(ExplorerSection):
 
     def __init__(self):
         super().__init__("/api/price/marketcap")  
@@ -161,7 +117,7 @@ class McapSection(Section):
         write_big("${:.2f}Trillion".format(int(self.data["usd"]) / 1000000000000), "marketcap")
 
 
-class XRatesSection(Section):
+class XRatesSection(ExplorerSection):
 
     def __init__(self):
         super().__init__("/api/price")  
@@ -184,7 +140,7 @@ class XRatesSection(Section):
         write_big("£{:,.2f}".format(float(self.data["gbp"])), "gbpbtc")
 
 
-class SatRatesSection(Section):
+class SatRatesSection(ExplorerSection):
 
     def __init__(self):
         super().__init__("/api/price/sats")  
@@ -206,71 +162,3 @@ class SatRatesSection(Section):
             write_big("{:,}".format(int(self.data["usd"])), "satsusd")
         write_big("{:,}".format(int(self.data["gbp"])), "satsgbp")
 
-
-def lfg():
-    lcd.clear()
-    animate_title('LET\'S', 1)
-    sleep(.5)
-    lcd.clear()
-    animate_title('F**#!NG', 2)
-    sleep(.5)
-    lcd.clear()
-    animate_title('>>> GO <<<', 3)
-    sleep(.3)
-    lcd.clear()
-    animate_title('>>> GO <<<', 3)
-    sleep(.1)
-    center_string('LET\'S', 1)
-    center_string('F**#!NG', 2)
-    center_string('>>> GO <<<', 3)
-    sleep(1)
-    for x in range(3):
-
-        lcd.cursor_pos = (2, 6)
-        lcd.write_string('#')
-        lcd.cursor_pos = (2, 14)
-        lcd.write_string('#')
-        lcd.cursor_pos = (1, 4)
-        lcd.write_string('#')
-        lcd.cursor_pos = (1, 16)
-        lcd.write_string('#')
-        lcd.cursor_pos = (0, 8)
-        lcd.write_string('#')
-        lcd.cursor_pos = (0, 12)
-        lcd.write_string('#')
-
-        sleep(0.01)
-
-        lcd.cursor_pos = (2, 5)
-        lcd.write_string('# ')
-        lcd.cursor_pos = (2, 14)
-        lcd.write_string(' #')
-        lcd.cursor_pos = (1, 2)
-        lcd.write_string('#  ')
-        lcd.cursor_pos = (1, 16)
-        lcd.write_string('  #')
-        lcd.cursor_pos = (0, 5)
-        lcd.write_string('#   ')
-        lcd.cursor_pos = (0, 12)
-        lcd.write_string('   #')
-
-        sleep(0.01)
-
-        lcd.cursor_pos = (2, 5)
-        lcd.write_string('  ')
-        lcd.cursor_pos = (2, 14)
-        lcd.write_string('  ')
-        lcd.cursor_pos = (1, 2)
-        lcd.write_string('   ')
-        lcd.cursor_pos = (1, 16)
-        lcd.write_string('   ')
-        lcd.cursor_pos = (0, 5)
-        lcd.write_string('    ')
-        lcd.cursor_pos = (0, 12)
-        lcd.write_string('    ')
-
-        sleep(0.01)
-
-
-    sleep(1)
-    lcd.clear()

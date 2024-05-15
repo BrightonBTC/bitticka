@@ -1,4 +1,4 @@
-# *::: :B:itticka :::*
+# *:::-: b:t-t:cka :-:::*
 #### *bitcoin ticker/block clock with a raspi + 20x4 alphanumeric lcd*
 
 This simple ticker connects to a [BitcoinExplorer](https://bitcoinexplorer.org) instance and displays some stats about the bitcoin network such as exchange rates, halving countdown, latest block, etc.

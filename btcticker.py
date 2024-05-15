@@ -1,14 +1,16 @@
-import views
+import views.fun as fun
+import views.explorer as explorer
+import views.mempool as mempool
 
-views.welcome()
+fun.welcome()
 
 while 1:
-
-    views.lfg()
-    views.McapSection()
-    views.HalvingSection()
-    views.XRatesSection()
-    views.SatRatesSection()
-    views.BlockheightSection()
-    views.SupplySection()
-
+    
+    fun.lfg()
+    explorer.McapSection()
+    explorer.HalvingSection()
+    explorer.XRatesSection()
+    explorer.SatRatesSection()
+    explorer.BlockheightSection()
+    explorer.SupplySection()
+    mempool.DifficultySection()

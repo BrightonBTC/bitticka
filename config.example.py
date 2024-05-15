@@ -2,7 +2,10 @@
 LCD_ADDRESS = 0x27
 
 # URL of a bitcoin explorer instance. No trailing slash.
-API_URL = 'https://bitcoinexplorer.org'
+EXPLORER_API_URL = 'https://bitcoinexplorer.org'
+
+# URL of a mempool instance. No trailing slash.
+# MEMPOOL_API_URL = 'https://mempool.space'
 
 # Enable/disable back light
 BACKLIGHT = True 
