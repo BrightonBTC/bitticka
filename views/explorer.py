@@ -156,7 +156,8 @@ class SatRatesSection(ExplorerSection):
 
     def screen2(self):
         if config.MOSCOWTIME:
-            write_big("{}".format(int(self.data["usd"])), "moscowtime")
+            usd = str(self.data["usd"]).zfill(4)
+            write_big("{}:{}".format(usd[0:2], usd[2:4]), "moscowtime")
         else:
             write_big("{:,}".format(int(self.data["usd"])), "satsusd")
         write_big("{:,}".format(int(self.data["gbp"])), "satsgbp")

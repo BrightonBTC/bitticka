@@ -3,6 +3,7 @@ import views.explorer as explorer
 import views.mempool as mempool
 import views.btccore as btccore
 
+explorer.SatRatesSection()
 fun.welcome()
 
 while 1:
