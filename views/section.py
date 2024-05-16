@@ -19,10 +19,9 @@ class Section:
             self.screen1()
             sleep(config.PAUSE_LEN)
             self.screen2()
-            self.screen1()
-            sleep(config.PAUSE2_LEN)
-            lcd.clear()
-            sleep(config.PAUSE3_LEN)
+            # sleep(config.PAUSE2_LEN)
+            # lcd.clear()
+            # sleep(config.PAUSE3_LEN)
         else:
             self.error()
 

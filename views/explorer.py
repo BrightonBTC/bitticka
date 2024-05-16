@@ -68,7 +68,6 @@ class HalvingSection(ExplorerSection):
         for x in range(len(parts)):
             #lcd.cursor_pos = (x+1, 7)
             center_string(parts[x].strip(' \t\n\r'), x+1)
-            print('#{}#'.format(parts[x].strip(' \t\n\r')))
             #center_string(parts[x].strip(' \t\n\r'), x+1)
 
 

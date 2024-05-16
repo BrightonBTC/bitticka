@@ -71,6 +71,13 @@ sudo pip install RPLCD
 sudo apt install python-smbus
 ```
 
+### Optional depedencies for BTC RPC
+If you wish to connect to your Bitcoin Core node then you'll need the following packages
+
+```
+pip install bitcoinrpc typing-extensions httpx orjson asyncio
+```
+
 ## Clone this repo
 ```
 git clone https://github.com/BrightonBTC/bitticka.git
@@ -84,12 +91,22 @@ Copy `config.example.py` to `config.py` and open it for editing
 sudo cp config.example.py config.py
 sudo nano config.py
 ```
-Change the LCD_ADDRESS to the one you noted down earlier, and change API_URL to your self hosted or preferred instance.
+Change the LCD_ADDRESS to the one you noted down earlier, and change API/RPC details to your self hosted or preferred instances. At time of writing most of the views available use the bitcoinexplorer API, but a couple of screens are also available via the mempool API and Bitcoin Core.
 ```
 LCD_ADDRESS = 0x27
 
 # URL of a bitcoin explorer instance. No trailing slash.
-API_URL = 'https://bitcoinexplorer.org'
+EXPLORER_API_URL = 'https://bitcoinexplorer.org'
+
+# mempool API URL if required
+# MEMPOOL_API_URL = 'https://mempool.space'
+
+# Bitcoin Core details if required
+BITCOIN_RPC_AUTH = {
+    'user': "",
+    'password': "",
+    'url': "http://192.168.1.99:8332"  
+}
 ```
 
 ## Test run
@@ -109,7 +126,7 @@ If you want to run it as a service so that it will always run after a reboot etc
 sudo nano /etc/systemd/system/btcticker.service
 ```
 
-Enter the following making sure to make the appropriate change to the `.../bitticka/btcticker.py` path
+Enter the following making sure to make the appropriate change to the `.../bitticka/btcticker.py` path and user name
 
 ```
 [Unit]
@@ -119,6 +136,7 @@ After=multi-user.target
 Type=simple
 Restart=always
 ExecStart=/usr/bin/python3 /home/[user]/bitticka/btcticker.py
+User=[user]
 [Install]
 WantedBy=multi-user.target
 ```
@@ -129,6 +147,10 @@ And run the service:
 sudo systemctl daemon-reload
 sudo systemctl enable btcticker.service
 sudo systemctl restart btcticker.service
+
+## check everythings working
+sudo systemctl status btcticker.service
+sudo journalctl -f -u btcticker.service
 ```
 
 ## Further Configuration
@@ -139,18 +161,32 @@ The various screens that are displayed on the LCD are grouped in to sections, yo
 
 ```python
 # btcticker.py
-import views
 
-views.welcome()
+## load the views depending on which API's you're using
+import views.fun as fun
+import views.explorer as explorer
+import views.mempool as mempool
+import views.btccore as btccore
+
+## views called here run once on start up
+fun.welcome()
 
 while 1:
-    views.lfg()
-    views.McapSection()
-    views.HalvingSection()
-    views.XRatesSection()
-    views.SatRatesSection()
-    views.BlockheightSection()
-    views.SupplySection()
+    ## views inside the while loop will loop indefinitely
+    fun.lfg()
+
+    mempool.DifficultySection()
+
+    explorer.McapSection()
+    explorer.HalvingSection()
+    explorer.XRatesSection()
+    explorer.SatRatesSection()
+    explorer.BlockheightSection()
+    explorer.SupplySection()
+
+    btccore.SmartFeesSection()
+
+
 ```
 
 any views before the while loop play once when bitticka first loads. Anything inside the while loop will loop continuously.
