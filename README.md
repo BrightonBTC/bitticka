@@ -1,12 +1,14 @@
 # *:::-: b:t-t:cka :-:::*
 #### *bitcoin ticker/block clock with a raspi + 20x4 alphanumeric lcd*
 
-This simple ticker connects to a [BitcoinExplorer](https://bitcoinexplorer.org) instance and displays some stats about the bitcoin network such as exchange rates, halving countdown, latest block, etc.
+This simple Bitcoin ticker/ block clock connects to a [BitcoinExplorer](https://bitcoinexplorer.org) instance and displays some stats about the bitcoin network such as exchange rates, halving countdown, latest block, etc.. 
+
+It can also connect to a [Mempool](https://mempool.space) instance, or even your own BTC Core node, but at time of writing there are limited views available for these options.
 
 ![bitticka](img/20240512_124431.gif)
 ![bitticka](img/20240512_132118.gif) 
 
-_**TODO**_ (at some point if I get around to it): Setup connection to BTC Core node and use RPC data to add a few extra info screens to the LCD.
+
 
 ## Required Components
 
