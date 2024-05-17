@@ -70,9 +70,9 @@ class SmartFeesSection(BTCCoreSection):
     def screen1(self):
         lcd.clear()
         center_string("FEE ESTIMATES:", 0)
-        center_string("ASAP: {}sats/vB".format(int(self.data['asap']['feerate']*100000)), 1)
-        center_string("hour: {}sats/vB".format(int(self.data['hour']['feerate']*100000)), 2)
-        center_string("day:  {}sats/vB".format(int(self.data['day']['feerate']*100000)), 3)
+        center_string("ASAP: {} sats/vB".format(int(self.data['asap']['feerate']*100000)), 1)
+        center_string("hour: {} sats/vB".format(int(self.data['hour']['feerate']*100000)), 2)
+        center_string("day:  {} sats/vB".format(int(self.data['day']['feerate']*100000)), 3)
         print(self.data)
 
     def screen2(self):
