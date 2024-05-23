@@ -48,7 +48,7 @@ sudo apt-get install i2c-tools
 2) reboot pi
 3) find the address:
 ```
-sudo apt-get install i2c-tools
+i2cdetect -y 1
 ```
 You should now see a table similar to below in which one cell contains a number. **Note this number down.**
 
